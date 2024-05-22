@@ -7,7 +7,7 @@ import {
 } from 'typeorm';
 import { Character } from './character.entity';
 import { Power } from './power.entity';
-
+// Add to review
 @Entity()
 @Unique(['character', 'power'])
 export class CharacterToPower {
