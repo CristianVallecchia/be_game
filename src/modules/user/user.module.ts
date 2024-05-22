@@ -9,5 +9,6 @@ import { UserMapper } from 'src/utilities/mappers/user.mapper';
   imports: [TypeOrmModule.forFeature([User])],
   controllers: [UserController],
   providers: [UserMapper, UserService],
+  exports: [UserService, TypeOrmModule.forFeature([User]), UserMapper],
 })
 export class UserModule {}

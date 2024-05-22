@@ -1,0 +1,37 @@
+{
+  "root": true,
+  "ignorePatterns": [],
+  "env": {
+    "node": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": [
+      "tsconfig.json"
+    ],
+    "createDefaultProgram": true
+  },
+  "plugins": ["@typescript-eslint"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:prettier/recommended",
+    "plugin:@typescript-eslint/eslint-recommended", 
+    "plugin:prettier/recommended"
+  ],
+  "rules": {
+    "@typescript-eslint/explicit-function-return-type": "error",
+    "@typescript-eslint/no-empty-function": 2,
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error", // or "error"
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "caughtErrorsIgnorePattern": "^_"
+      }
+    ],
+    "prettier/prettier": 2,
+    "no-undef": "error"
+   
+  }
+}

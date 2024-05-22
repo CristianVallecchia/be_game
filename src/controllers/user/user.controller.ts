@@ -1,18 +1,42 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
-import { CreateUserDTO } from 'src/dtos/user/create-user.dto';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Put,
+  UseGuards,
+} from '@nestjs/common';
+import { MutateUserDTO } from 'src/dtos/user/mutate-user.dto';
+import { JwtGuard } from 'src/guards/authentication/jwt-auth.guard';
+import { ReadUser } from 'src/models/user/read-user';
 import { UserService } from 'src/services/user/user.service.impl';
 
+@UseGuards(JwtGuard)
 @Controller('user')
 export class UserController {
-  constructor(private readonly service: UserService) {}
+  constructor(private readonly userService: UserService) {}
 
-  @Post('/create')
-  async createUser(@Body() createUserDTO: CreateUserDTO) {
-    return await this.service.create(createUserDTO);
+  @Get('/:id')
+  async getUser(@Param('id') id: number): Promise<ReadUser> {
+    return await this.userService.findById(id);
   }
 
-  @Get('/getTest')
-  browse() {
-    return 'test';
+  @Get()
+  async getAllUsers(): Promise<ReadUser[]> {
+    return await this.userService.findAll();
+  }
+
+  @Put('/:id')
+  async updateUser(
+    @Param() id: number,
+    @Body() mutateUserDTO: MutateUserDTO,
+  ): Promise<ReadUser> {
+    return await this.userService.update(id, mutateUserDTO);
+  }
+
+  @Delete('/delete/:id')
+  async deleteUser(@Param('id') id: number): Promise<void> {
+    await this.userService.delete(id);
   }
 }
