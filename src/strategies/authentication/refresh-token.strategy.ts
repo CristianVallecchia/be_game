@@ -1,7 +1,7 @@
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { User } from 'src/entities/user.entity';
-
+// Add to review
 export class RefreshTokenStrategy extends PassportStrategy(
   Strategy,
   'jwt-refresh',
